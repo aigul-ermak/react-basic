@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState} from 'react';
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -10,21 +10,27 @@ import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
 
 
-const App =() => {
 
-    const [selectedChar, setSelectedChar] = useState(null)
+const App =()=> {
+
+    const [selectedChar,setChar ] = useState(null)
+
 
     const onCharSelected = (id) => {
-        setSelectedChar(id)
+        setChar(id)
     }
 
         return (
             <div className="app">
                 <AppHeader/>
                 <main>
-                    <RandomChar/>
+                    <ErrorBoundary>
+                        <RandomChar/>
+                    </ErrorBoundary>
                     <div className="char__content">
-                        <CharList onCharSelected={onCharSelected}/>
+                        <ErrorBoundary>
+                            <CharList onCharSelected={onCharSelected}/>
+                        </ErrorBoundary>
                         <ErrorBoundary>
                             <CharInfo charId={selectedChar}/>
                         </ErrorBoundary>
